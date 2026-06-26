@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>دعوة فرح محمود و منى</title>
+    <!-- استخدم خطوط عربية وإنجليزية: Cairo للعربي و Montserrat للحروف الرقيقة -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Firebase scripts removed -->
+</head>
+<body>
+<!-- ملف الصوت: ضع audio/song.mp3 داخل المجلد audio -->
+<audio id="bgAudio" src="audio/song.mp3" preload="auto" loop></audio>
+
+<!-- شاشة الظرف -->
+<div id="envelope">
+    <div class="envelope-card" role="button" tabindex="0" aria-label="افتح الدعوة">
+        <div class="envelope-flap">
+            <p class="envelope-top-text">اللهم اجعل كل حياتنا في رحاب قولك: <br> ‏﴿فَرِحِينَ بِمَا آتَاهُمُ اللَّهُ مِنْ فَضْلِهِ﴾ ♥️</p>
+        </div>
+        <div class="envelope-body">
+            <!-- محتوى الظرف (بدون زر الفتح) -->
+         </div>
+    </div>
+    <!-- زر دائري لفتح الدعوة (موضوع فوق الظرف ليظهر أمام الطيّة) -->
+    <button id="openCircleBtn" class="open-circle" aria-label="افتح الدعوة">اِفْتَح</button>
+</div>
+
+<!-- الدعوة -->
+<div id="invitation">
+     <!-- زر الموسيقى داخل الدعوة (يظهر بعد الفتح) -->
+     <button id="musicBtn" class="music-btn" aria-label="تشغيل أو إيقاف الموسيقى" hidden>▶</button>
+     <button id="inviteHeart" class="heart-seal in-invitation" aria-hidden="true">♥</button>
+     <!-- رأس الدعوة -->
+     <section id="header">
+        <p class="invitation-intro" style="margin:2px 0 6px 0; font-size:20px; font-weight:600; text-align:center;">
+            <span class="intro-line line1">في العلن💖</span><br>
+            <span class="intro-line line2">وأمام الجميع نُعلن انضمام النون لقاموسنا</span><br>
+            <span class="intro-line line3">صِرنا نحن👫</span><br>
+            <span class="intro-line line4">نُحارب الدُنيا، لكي نُكون سويًا حتى النهاية&nbsp;∞💖.</span>
+        </p>
+         <div class="count-photo header-photo" aria-hidden="false">
+             <img src="images/photo99.png" alt="قاعة أو صورة مميزة" class="count-photo-img">
+         </div>
+        <h1>غفلنا الجميع وبنتجوز من غير مواضيع ♥️😂</h1>
+        <p>بسم الله الرحمن الرحيم</p>
+        <p>(وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً إِنَّ فِي ذَلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ).</p>
+        <p>صدق الله العظيم</p>
+        <p>اللهُمَ كَما أنعَمت فَزد ، وكَما زِدت فَبارك ، وَكَما بَارَكت فَتّمم ، وَكَما أتْممتَ فثبت يارب العالمين ❤️</p>
+        <div class="header-divider" role="separator" aria-hidden="true"></div>
+         </section>
+
+    <!-- العد التنازلي -->
+    <section id="countdown">
+        <h2>فرحنا قرب!</h2>
+        <div id="timer"></div>
+        <!-- مربع تاريخ اليوم تحت العدّاد -->
+        <div id="todaySquare" aria-label="تاريخ الحدث: 3 أغسطس 2026" role="button" tabindex="0">
+            <div class="today-month">---</div>
+            <div class="today-weekday">---</div>
+            <div class="today-day">--</div>
+        </div>
+        <!-- زر شفاف لحفظ الموعد في التقويم -->
+        <button id="saveCalBtn" class="save-cal-btn" aria-label="حفظ الموعد">حفظ الموعد</button>
+        <!-- زر تحكم تحرير أُزيل: لا يوجد قفل بعد الآن -->
+    </section>
+
+    <!-- تفاصيل الفرح -->
+    <section id="details">
+        <p>🗓️ الاثنين 3 أغسطس 2026 - الساعة 8 مساءً</p>
+        <p>📍 قاعة الأوركيد - الزقازيق</p>
+        <p class="romance">❤️ معا نبدأ فصلا جديدا من حياتنا — حضوركم يزيد فرحنا ونغمة قلوبنا دفء.</p>
+    </section>
+
+    <!-- رسائل قصيرة ترسل عبر واتساب للعروسين -->
+    <section id="messages" aria-label="أرسل رسالة للعروسين">
+        <h3>ابعتلنا رسالة تهنئة</h3>
+        <textarea id="msgInput" placeholder="اكتب رسالتك الحلوة هنا للعروسين..." aria-label="نص الرسالة" required aria-required="true"></textarea>
+        <div><button id="sendSarahahBtn" class="btn-wa">أرسل التهنئة عبر واتساب</button></div>
+    </section>
+
+    <!-- سجل المراحل المميزة (شجري) -->
+    <section id="milestones-log" aria-label="سجل التواريخ المميزة">
+        <h3>حكاية مودة ورحمة فى اربع فصول😍💖</h3>
+        <div id="milestonesContainer"></div>
+    </section>
+
+    <!-- معرض الصور -->
+    <section id="gallery">
+        <!--<h3>صور المراحل</h3>-->
+        <div class="milestone-gallery">
+            <figure class="mg-item">
+                <img src="images/milestone-start.jpg" alt="بداية طيبة">
+                <figcaption tabindex="0"><div class="mg-label">بداية طيبة</div><div class="mg-date">22 فبراير 2026</div></figcaption>
+            </figure>
+            <figure class="mg-item">
+                <img src="images/milestone-accept.jpg" alt="قراءة الفاتحة">
+                <figcaption tabindex="0"><div class="mg-label">قراءة الفاتحة</div><div class="mg-date">07 مارس 2026</div></figcaption>
+            </figure>
+            <figure class="mg-item">
+                <img src="images/milestone-engagement.jpg" alt="الخطوبة">
+                <figcaption tabindex="0"><div class="mg-label">الخطوبة</div><div class="mg-date">01 مايو 2026</div></figcaption>
+            </figure>
+            <figure class="mg-item">
+                <img src="images/milestone-wedding.jpg" alt="زفاف مبارك">
+                <figcaption tabindex="0"><div class="mg-label">زفاف مبارك</div><div class="mg-date">03 أغسطس 2026</div></figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <!-- الخريطة -->
+    <section id="map">
+        <a href="https://maps.app.goo.gl/zHhWCXKPzo32eQQW6" target="_blank">
+            اضغط هنا للدخول الى مكان القاعة
+        </a>
+    </section>
+
+    <!-- guestbook removed -->
+</div>
+
+<!-- Password modal (hidden by default) -->
+<div id="pwModal" class="modal" style="display:none;">
+  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="pwModalTitle">
+    <h3 id="pwModalTitle">كلمة المرور</h3>
+    <div id="pwModalBody">
+      <!-- dynamic content inserted by JS -->
+    </div>
+    <div class="modal-actions">
+      <button id="pwCancelBtn" class="save-cal-btn">إلغاء</button>
+      <button id="pwConfirmBtn" class="save-cal-btn">موافقة</button>
+    </div>
+  </div>
+</div>
+
+<!-- Editor modal (hidden) -->
+<div id="editorModal" class="modal" style="display:none;">
+  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="editorModalTitle">
+    <h3 id="editorModalTitle">تحرير المراحل</h3>
+    <div id="editorModalBody">
+      <!-- fields inserted by JS -->
+    </div>
+    <div class="modal-actions">
+      <button id="editorCancelBtn" class="save-cal-btn">إلغاء</button>
+      <button id="editorSaveBtn" class="save-cal-btn">حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- ربط ملف JavaScript -->
+<script>
+    // inlined script.js
+    // filepath: e:\\WeddingInvitation\\script.js
+    document.addEventListener('DOMContentLoaded', () => {
+        // عناصر الواجهة
+        const envelope = document.getElementById('envelope');
+        const envelopeCard = document.querySelector('.envelope-card');
+        const invitation = document.getElementById('invitation');
+        const timer = document.getElementById('timer');
+        const openCircleBtn = document.getElementById('openCircleBtn');
+
+        // ==== Auto-scroll helpers: ensure functions exist before use ====
+        let _autoScrollRaf = null;
+        function autoScrollToElementBottom(el, duration = 60000) {
+            try {
+                const startY = window.scrollY || window.pageYOffset;
+                const target = Math.min(el.offsetTop + el.scrollHeight - window.innerHeight, document.body.scrollHeight - window.innerHeight);
+                const distance = target - startY;
+                if (Math.abs(distance) < 8) return;
+                let startTime = null;
+                function step(ts) {
+                    if (!startTime) startTime = ts;
+                    const elapsed = ts - startTime;
+                    const t = Math.min(elapsed / duration, 1);
+                    const ease = t < 0.5 ? 2*t*t : -1 + (4-2*t)*t;
+                    window.scrollTo(0, Math.round(startY + distance * ease));
+                    if (t < 1) _autoScrollRaf = requestAnimationFrame(step);
+                    else _autoScrollRaf = null;
+                }
+                _autoScrollRaf = requestAnimationFrame(step);
+            } catch (e) { /* ignore */ }
+        }
+        function stopAutoScroll() { if (_autoScrollRaf) { cancelAnimationFrame(_autoScrollRaf); _autoScrollRaf = null; } }
+        // Stop on user interaction
+        ['wheel','touchstart','keydown','mousedown'].forEach(ev => window.addEventListener(ev, stopAutoScroll, { passive: true }));
+
+        // تأكد أن الدعوة مخفية في البداية (تعتمد على CSS .show)
+        if (invitation) invitation.classList.remove('show');
+
+        if (!envelope || !envelopeCard || !invitation) {
+            console.warn('العناصر المطلوبة لشاشة الفتح غير موجودة.');
+            return;
+        }
+
+        // تأثير بصري سريع عند الضغط
+        envelopeCard.addEventListener('mousedown', () => envelopeCard.classList.add('popping'));
+        ['mouseup', 'mouseleave', 'blur'].forEach(ev =>
+            envelopeCard.addEventListener(ev, () => envelopeCard.classList.remove('popping'))
+        );
+
+        // فتح الظرف وعرض الدعوة بعد انتهاء الأنيميشن
+        // عناصر الصوت وزر الموسيقى
+        const bgAudio = document.getElementById('bgAudio');
+        const musicBtn = document.getElementById('musicBtn');
+        function setPlayingState(isPlaying){
+            if(!musicBtn) return;
+            musicBtn.textContent = isPlaying ? '❚❚' : '▶';
+            musicBtn.classList.toggle('playing', isPlaying);
+            musicBtn.hidden = false;
+        }
+        if(musicBtn){
+            musicBtn.addEventListener('click', (e)=>{
+                e.stopPropagation();
+                if(!bgAudio) return;
+                if(bgAudio.paused){ bgAudio.play().then(()=>setPlayingState(true)).catch(()=>{}); }
+                else { bgAudio.pause(); setPlayingState(false); }
+            });
+        }
+
+        // Password modal helper: shows masked password inputs (type=password) for 'set' or 'unlock'
+        function openPasswordModal(mode, callback){
+            try{
+                const modal = document.getElementById('pwModal');
+                const body = document.getElementById('pwModalBody');
+                const ok = document.getElementById('pwConfirmBtn');
+                const cancel = document.getElementById('pwCancelBtn');
+                if(!modal || !body || !ok || !cancel) return;
+                // build inputs
+                if(mode === 'set'){
+                    body.innerHTML = '<input id="pw1" type="password" placeholder="كلمة المرور" class="pw-input" style="width:90%;padding:8px;margin-bottom:8px;">' +
+                                     '<input id="pw2" type="password" placeholder="تأكيد كلمة المرور" class="pw-input" style="width:90%;padding:8px;">';
+                } else {
+                    body.innerHTML = '<input id="pw1" type="password" placeholder="أدخل كلمة المرور" class="pw-input" style="width:90%;padding:8px;">';
+                }
+                // show modal
+                modal.style.display = 'flex';
+                // focus first input
+                setTimeout(()=>{ const i = document.getElementById('pw1'); if(i) i.focus(); }, 50);
+                // cleanup helpers
+                const cleanup = ()=>{ try{ ok.removeEventListener('click', onOk); cancel.removeEventListener('click', onCancel); modal.style.display = 'none'; }catch(e){} };
+                function onOk(){
+                    const v1 = (document.getElementById('pw1')||{}).value || '';
+                    if(mode === 'set'){
+                        const v2 = (document.getElementById('pw2')||{}).value || '';
+                        cleanup(); callback && callback(v1, v2);
+                    } else { cleanup(); callback && callback(v1); }
+                }
+                function onCancel(){ cleanup(); callback && callback(null); }
+                ok.addEventListener('click', onOk);
+                cancel.addEventListener('click', onCancel);
+            }catch(e){ console.warn('openPasswordModal', e); }
+        }
+        // expose password modal helper globally to avoid prompt fallback
+        try{ window.openPasswordModal = openPasswordModal; }catch(e){}
+
+        // make opening behavior reusable and allow external big button to trigger it
+        function openEnvelope(){
+            try{ envelopeCard.classList.add('opening'); }catch(e){}
+            // بعد مدة مساوية للانتقال في CSS
+            setTimeout(() => {
+                try{ envelope.style.display = 'none'; /* prevent focusable descendants from being hidden via aria-hidden; use inert */ envelope.setAttribute('inert',''); }catch(e){}
+                 try{ invitation.classList.add('show'); }catch(e){}
+                try{ if(window.startMilestonesAutoScroll) window.startMilestonesAutoScroll(); }catch(e){}
+                try { invitation.scrollIntoView({ behavior: 'smooth' }); } catch (e) {}
+                // ابدأ التمرير البطيء التلقائي لداخل الدعوة بعد الفتح
+                try{ if(typeof autoScrollToElementBottom === 'function') autoScrollToElementBottom(invitation, 40000); }catch(e){}
+                // حاول تشغيل الموسيقى بعد نقرة المستخدم
+                if(bgAudio){
+                    try{ bgAudio.currentTime = 0; }catch(e){}
+                    const p = bgAudio.play();
+                    if(p && p.then) p.then(()=>setPlayingState(true)).catch(()=>{});
+                    else setPlayingState(!bgAudio.paused);
+                }
+            }, 800);
+        }
+
+        envelopeCard.addEventListener('click', openEnvelope);
+        if(openCircleBtn){
+            // hide the big open button immediately when used and trigger opening
+            openCircleBtn.addEventListener('click', (e)=>{ e.stopPropagation(); openCircleBtn.classList.add('hidden'); try{ openCircleBtn.blur(); }catch(err){} openEnvelope(); });
+            openCircleBtn.setAttribute('role','button'); openCircleBtn.setAttribute('tabindex','0');
+            openCircleBtn.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openCircleBtn.classList.add('hidden'); try{ openCircleBtn.blur(); }catch(err){} openEnvelope(); } });
+        }
+
+        // عدّاد تنازلي
+        const weddingDate = new Date('August 3, 2026 20:00:00').getTime();
+        function formatCountdown(ms) {
+            const days = Math.floor(ms / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((ms % (1000 * 60)) / 1000);
+            return `${days} يوم ${hours} ساعة ${minutes} دقيقة ${seconds} ثانية`;
+        }
+
+        function updateTimer() {
+            const now = Date.now();
+            const distance = weddingDate - now;
+            if (distance <= 0) {
+                timer.innerHTML = 'الفرح بدأ 🎉';
+                clearInterval(countdownInterval);
+                return;
+            }
+            timer.innerHTML = formatCountdown(distance);
+        }
+
+        updateTimer();
+        const countdownInterval = setInterval(updateTimer, 1000);
+
+        // عرض تاريخ ثابت تحت العدّاد: 3 أغسطس 2026 مع يوم الأسبوع
+        (function showTodaySquare(){
+            const sq = document.getElementById('todaySquare');
+            if(!sq) return;
+            const weekdayEl = sq.querySelector('.today-weekday');
+            const dayEl = sq.querySelector('.today-day');
+            const monthEl = sq.querySelector('.today-month');
+            if(monthEl) monthEl.textContent = 'أغسطس 2026';
+            if(weekdayEl) weekdayEl.textContent = 'الاثنين';
+            if(dayEl) dayEl.textContent = '3';
+        })();
+
+        // ===== إضافة حفظ الحدث إلى التقويم (ICS) وفتح Google Calendar عند النقر =====
+        (function initCalendarExport(){
+            const sq = document.getElementById('todaySquare');
+            if(!sq) return;
+            const title = 'فرح محمود و منى';
+            const description = 'دعوة حفل زفاف محمود ومنى — حضوركم يسعدنا.';
+            const location = 'قاعة الأوركيد - الزقازيق';
+            const start = new Date('2026-08-03T20:00:00');
+            const end = new Date(start.getTime() + 3*60*60*1000); // 3 ساعات
+
+            function toICSDate(d){
+                // return in UTC format YYYYMMDDTHHMMSSZ
+                const pad = n => String(n).padStart(2,'0');
+                return d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+pad(d.getUTCSeconds())+'Z';
+            }
+
+            function downloadICS(){
+                const uid = 'wedding-'+Date.now()+'@local';
+                const dtstamp = toICSDate(new Date());
+                const dtstart = toICSDate(start);
+                const dtend = toICSDate(end);
+                const icsLines = [
+                    'BEGIN:VCALENDAR',
+                    'VERSION:2.0',
+                    'PRODID:-//Wedding Invitation//EN',
+                    'CALSCALE:GREGORIAN',
+                    'BEGIN:VEVENT',
+                    'UID:'+uid,
+                    'DTSTAMP:'+dtstamp,
+                    'DTSTART:'+dtstart,
+                    'DTEND:'+dtend,
+                    'SUMMARY:'+title,
+                    'DESCRIPTION:'+description,
+                    'LOCATION:'+location,
+                    'END:VEVENT',
+                    'END:VCALENDAR'
+                ].join('\r\n');
+                const blob = new Blob([icsLines], { type: 'text/calendar;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url; a.download = 'wedding_event.ics'; document.body.appendChild(a);
+                a.click(); setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 1500);
+            }
+
+            function openGoogleCal(){
+                const pad = n => String(n).padStart(2,'0');
+                const toGCDate = d => d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+pad(d.getUTCSeconds())+'Z';
+                const dates = toGCDate(start)+'/'+toGCDate(end);
+                const url = 'https://calendar.google.com/calendar/r/eventedit?text='+encodeURIComponent(title)+
+                    '&dates='+dates+
+                    '&details='+encodeURIComponent(description)+
+                    '&location='+encodeURIComponent(location);
+                window.open(url, '_blank');
+            }
+
+            function handleActivate(){
+                // قم بتنزيل ملف .ics وفتح Google Calendar لتسهيل الحفظ
+                try{ downloadICS(); }catch(e){}
+                try{ openGoogleCal(); }catch(e){}
+            }
+
+            sq.addEventListener('click', handleActivate);
+            sq.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleActivate(); } });
+
+            // زر الحفظ المنفصل تحت المربع: ينزل ملف .ics فقط عند الطلب
+            const saveBtn = document.getElementById('saveCalBtn');
+            if(saveBtn){
+                saveBtn.addEventListener('click', (ev)=>{ ev.stopPropagation(); try{ downloadICS(); }catch(e){} });
+            }
+        })();
+
+        // إرسال عبر صراحة: فتح صفحة الحساب لكتابة رسالة
+        (function initSarahah(){
+            const sendBtn = document.getElementById('sendSarahahBtn');
+            const ta = document.getElementById('msgInput');
+            if(!sendBtn || !ta) return;
+            const profileUrl = 'https://chat.whatsapp.com/GFVeBlE7Dh35tJTjQEo9ap';
+            sendBtn.addEventListener('click', async ()=>{
+                const bodyText = (ta.value || '').trim();
+                if(!bodyText){ try{ alert('اكتب رسالتك قبل الإرسال.'); }catch(e){} ta.focus(); return; }
+                const combined = bodyText;
+                // حاول إرسال إلى نقطة نهاية محلية (/api/send-sarahah) التي تقوم بإعادة توجيه الرسالة إلى الجروب
+                let sent = false;
+                try{
+                    const res = await fetch('/api/send-sarahah', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message: bodyText })
+                    });
+                    const data = res.ok ? await res.json().catch(()=>null) : null;
+                    if(res && res.ok && data && data.ok){
+                        if(data.redirectUrl){ try{ window.open(data.redirectUrl, '_blank'); }catch(e){} }
+                        sent = true; try{ alert('تم إرسال التهنئة عبر واتساب.'); }catch(e){}
+                    }
+                }catch(e){ /* ignore */ }
+                // always clear message input after attempt
+                try{ ta.value = ''; }catch(e){}
+                if(sent) return;
+                // fallback: انسخ النص للحافظة وسهّل فتح الجروب ليتم اللصق والإرسال يدويًا
+                if(navigator.clipboard){ navigator.clipboard.writeText(combined).catch(()=>{}); }
+                try{ const params = new URLSearchParams({ text: combined }); window.open(profileUrl + '?'+params.toString(), '_blank'); }catch(e){}
+                try{ alert('تم نسخ الرسالة. افتح الجروب والصقها ثم أرسل.'); }catch(e){}
+            });
+        })();
+
+        // سجل المراحل المميزة: تخزين per-stage في localStorage مع واجهة شجرية مبسطة
+        (function initMilestonesLog(){
+            const container = document.getElementById('milestonesContainer');
+            if(!container) return;
+            const stages = [
+                { k: 'start', label: 'بداية طيبة' },
+                { k: 'accept', label: 'قراءة الفاتحة' },
+                { k: 'engagement', label: 'الخطوبة' },
+                { k: 'wedding', label: 'زفاف مبارك' }
+            ];
+
+            // embedded static data inside index.html (no localStorage, no server fetch)
+            const embeddedData = {
+                start: { date: '22 فبراير  2026', note: 'بدأت الحكاية برؤية شرعية جمعت بين قلبين يسعيان لما فيه الخير، وكانت اول خطوة فى رحلة كتب الله لها ان تبدأ...💖' },
+                accept: { date: '07 مارس  2026', note: 'كبر بين القلوب قبول هادئ، وزاد الاطمئنان حين اجتمعت النية على بيت يقوم على الدين والاحترام وقُرئت الفاتحة.🤲🏻💕' },
+                engagement: { date: '01 مايو  2026', note: 'اجتمعت الاسرتان على خير، وكانت الخطوبة في أجواء مليئة بالحب والفرح.💍💖' },
+                wedding: { date: '03 أغسطس  2026', note: 'واليوم نبدأ حياتنا المشتركة معًا على المودة والرحمة ونسعد ان تشاركونا الدعاء والفرحة.🤵‍♂️👰‍♀️' }
+            };
+
+            function render(){
+                const data = embeddedData || {};
+                container.innerHTML = '';
+                const ul = document.createElement('ul'); ul.className = 'milestones-list';
+                stages.forEach(s=>{
+                    const li = document.createElement('li'); li.className='milestone';
+                    const val = data[s.k] || { date:'', note:'' };
+                    const labelText = (val && val.label) ? val.label : s.label;
+                    li.innerHTML = '<div class="marker" aria-hidden="true"></div>' +
+                        '<div class="content">' +
+                          '<div class="content-row">' +
+                            '<div class="m-date-top">' + (val.date||'---') + '</div>' +
+                            '<div class="m-box">' +
+                              '<div class="m-main">' +
+                                '<div class="m-label">' + labelText + '</div>' +
+                                '<div class="m-note">' + (val.note||'<span class="muted">لا توجد ملاحظات</span>') + '</div>' +
+                              '</div>' +
+                            '</div>' +
+                          '</div>' +
+                        '</div>';
+                    ul.appendChild(li);
+                });
+                container.appendChild(ul);
+            }
+
+            render();
+        })();
+
+        // lock feature removed
+     });
+    // end inlined script.js
+</script>
+</body>
+</html>
